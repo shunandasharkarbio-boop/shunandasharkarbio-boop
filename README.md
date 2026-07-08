@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Banner (2).png" width="50%"/>
+<img src="Banner (2).png" width="100%"/>
 
 # 👋 Hi, I'm Shunanda Sharkar
 
