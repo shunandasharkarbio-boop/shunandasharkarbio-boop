@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2E8B57,100:00C853&height=220&section=header&text=Shunanda%20Sharkar&fontSize=45&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Biotechnology%20Student%20|%20Bioinformatics%20Enthusiast%20|%20Galaxy%20Workflow%20Developer&descAlignY=58"/>
+<img src="banner bio.png" width="100%"/>
 
 # 👋 Hi, I'm Shunanda Sharkar
 
