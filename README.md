@@ -14,22 +14,24 @@
 
 ---
 
-# 🚀 About Me
+## 🌱 About Me
 
-🧬 Third-Year B.Tech Biotechnology Student
+<div align="center">
 
-🔬 Passionate about Bioinformatics and Computational Biology
+### 🧬 Biotechnology Journey
+Third-Year B.Tech Biotechnology Undergraduate  
+🎓 ICCR Scholar  
+🏥 28-Day Laboratory Internship at Medicover Hospital  
 
-💻 Working with Galaxy Platform
+<br>
 
-🐧 Learning Linux, Git and Python
+### 💻 Bioinformatics & Research Interests
+Learning Bioinformatics using the Galaxy Platform  
+🔬 Exploring Genetics, Computational Biology & NGS Analysis  
+🌱 Plant Lover | Nature Enthusiast  
+🎯 Aspiring Research Scientist  
 
-📊 Interested in NGS Data Analysis
-
-🧬 Exploring RNA-Seq, Variant Calling and Genome Analysis
-
----
-
+</div>
 # 🛠 Languages & Tools
 
 <p align="center">
