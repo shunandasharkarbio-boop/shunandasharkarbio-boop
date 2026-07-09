@@ -1,0 +1,37 @@
+name: Update Contribution Garden
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
+  workflow_dispatch: # Allows manual trigger from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Garden Generator
+        run: |
+          python generate_garden.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add garden.svg
+          if git diff --staged --quiet; then
+            echo "No changes in garden.svg"
+          else
+            git commit -m "chore: auto-update contribution garden [skip ci]"
+            git push
+          fi
