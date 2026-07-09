@@ -33,14 +33,12 @@
 
 ### 👩‍🔬 Who Am I?
 
-- 🎓 **3rd Year B.Tech Biotechnology** undergraduate
-- 🏅 Proud **ICCR (Indian Council for Cultural Relations) Scholar**
-- 🏥 Completed a **28-Day Wet Lab Internship** at **Medicover Hospital**
-- 🌌 Passionate **Galaxy Platform** workflow developer
-- 🔬 Exploring **Genetics, Computational Biology & NGS Analysis**
-- 🐍 Sharpening my **Python** skills for biological data science
-- 🌿 Plant Lover | Nature Enthusiast
-- 🎯 Aspiring **Research Scientist** in Genomics & Bioinformatics
+- 🌳 **Nature & Tree Lover:** Deeply connected to forests, trees, and the beauty of the natural world.
+- 🧘 **Solitude & Deep Focus:** I love quiet solitude, finding my absolute peace and focus in deep scientific thinking and code.
+- 🔬 **Aspiring Research Scientist:** Driven by the dream to become a research scientist in Genomics and Bioinformatics.
+- 🎓 **3rd Year B.Tech Biotechnology:** Undergraduate student and proud **ICCR Scholar**.
+- 🏥 **Medicover Hospital Intern:** Completed a 28-day wet lab clinical laboratory internship.
+- 🌌 **Galaxy & Python Developer:** Building NGS workflows and using Python for computational biology.
 
 <br/>
 
@@ -92,6 +90,16 @@
 <div align="center">
 
 <img src="garden.svg" width="100%" alt="Shunanda's Contribution Garden & Stats"/>
+
+</div>
+
+---
+
+## 🐍 Contribution Snake Game
+
+<div align="center">
+
+<img src="github-contribution-grid-snake-dark.svg" alt="Snake animation" />
 
 </div>
 
