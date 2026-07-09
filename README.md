@@ -28,7 +28,7 @@
 ## 🌟 About Me
 
 <div align="center">
-  <img src="./profile-banner.jpg" width="900" alt="Shunanda Sharkar Profile Dashboard"/>
+  <img src="./profile-banner-motion.gif" width="900" alt="Shunanda Sharkar Profile Dashboard"/>
 </div>
 
 <br/>
