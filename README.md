@@ -27,11 +27,9 @@
 
 ## 🌟 About Me
 
-<div align="center">
-  <img src="./profile-banner-motion.gif" width="900" alt="Shunanda Sharkar Profile Dashboard"/>
-</div>
-
-<br/>
+<table>
+<tr>
+<td width="55%" valign="top">
 
 ### 👩‍🔬 Biography
 *Deeply curious about nature, trees, and the science of life. I thrive in quiet solitude, finding my absolute focus in scientific thinking and coding. My ultimate goal is to become a research scientist in Genomics and Bioinformatics.*
@@ -47,6 +45,15 @@
 
 > *"In biology, nothing makes sense except in the light of evolution."*  
 > — Theodosius Dobzhansky
+
+</td>
+<td width="45%" align="center" valign="center">
+
+<img src="./profile-banner-motion.gif" width="380" alt="Shunanda Sharkar Profile Dashboard"/>
+
+</td>
+</tr>
+</table>
 
 ---
 
