@@ -27,7 +27,7 @@ OVERRIDE_LANGUAGES = [
 
 # Set to False to use actual contribution grid data.
 # Set to True to generate a lush, fully blooming demo garden.
-FORCE_LUSH_GARDEN = False 
+FORCE_LUSH_GARDEN = True 
 
 # ==========================================================
 # DATA FETCHING UTILITIES
