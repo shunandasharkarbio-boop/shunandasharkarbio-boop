@@ -6,8 +6,6 @@ from datetime import datetime
 
 # ==========================================================
 # CONFIGURATION & OVERRIDES
-# Set to None to use actual live GitHub data.
-# Set to values to show custom showcase stats.
 # ==========================================================
 OVERRIDE_STATS = {
     "public_repos": 24,
@@ -18,467 +16,466 @@ OVERRIDE_STATS = {
 }
 
 OVERRIDE_LANGUAGES = [
-    ("Python", 60.0, "#4ade80"),
-    ("R", 15.0, "#3b82f6"),
-    ("Jupyter", 10.0, "#f97316"),
-    ("JavaScript", 8.0, "#facc15"),
-    ("Other", 7.0, "#a8a29e")
+    ("Python",     60.0, "#4ade80"),
+    ("R",          15.0, "#3b82f6"),
+    ("Jupyter",    10.0, "#f97316"),
+    ("JavaScript",  8.0, "#facc15"),
+    ("Other",       7.0, "#a8a29e")
 ]
 
-# Set to False to use actual contribution grid data.
-# Set to True to generate a lush, fully blooming demo garden.
-FORCE_LUSH_GARDEN = True 
+# Set False to use real GitHub contribution data
+FORCE_LUSH_GARDEN = False
 
 # ==========================================================
-# DATA FETCHING UTILITIES
+# DATA FETCHING
 # ==========================================================
 def fetch_url(url):
-    req = urllib.request.Request(
-        url, 
-        headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-    )
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
-        with urllib.request.urlopen(req) as response:
-            return response.read().decode('utf-8')
+        with urllib.request.urlopen(req) as r:
+            return r.read().decode('utf-8')
     except Exception as e:
-        print(f"Error fetching {url}: {e}")
+        print(f"  Warning: {e}")
         return None
 
 def get_real_data(username):
-    user_stats = {}
-    
-    # 1. Fetch user general stats
-    user_data_raw = fetch_url(f"https://api.github.com/users/{username}")
-    if user_data_raw:
-        user_data = json.loads(user_data_raw)
-        user_stats['public_repos'] = user_data.get('public_repos', 0)
-        user_stats['followers'] = user_data.get('followers', 0)
-        user_stats['following'] = user_data.get('following', 0)
+    stats = {}
+    raw = fetch_url(f"https://api.github.com/users/{username}")
+    if raw:
+        d = json.loads(raw)
+        stats['public_repos'] = d.get('public_repos', 0)
+        stats['followers']    = d.get('followers', 0)
+        stats['following']    = d.get('following', 0)
     else:
-        user_stats = {'public_repos': 16, 'followers': 2, 'following': 1}
-        
-    # 2. Fetch repos to calculate languages and stars
-    repos_data_raw = fetch_url(f"https://api.github.com/users/{username}/repos?per_page=100")
-    languages = {}
-    stars = 0
-    if repos_data_raw:
-        repos_data = json.loads(repos_data_raw)
-        for repo in repos_data:
-            if not repo.get('fork', False):
+        stats = {'public_repos': 16, 'followers': 2, 'following': 1}
+
+    repos_raw = fetch_url(f"https://api.github.com/users/{username}/repos?per_page=100")
+    langs, stars = {}, 0
+    if repos_raw:
+        for repo in json.loads(repos_raw):
+            if not repo.get('fork'):
                 stars += repo.get('stargazers_count', 0)
                 lang = repo.get('language')
                 if lang:
-                    languages[lang] = languages.get(lang, 0) + 1
-    
-    user_stats['stars'] = stars
-    
-    # Languages color mapping
+                    langs[lang] = langs.get(lang, 0) + 1
+    stats['stars'] = stars
+
     lang_colors = {
-        "Python": "#4ade80",
-        "HTML": "#e34c26",
-        "CSS": "#563d7c",
-        "JavaScript": "#f1e05a",
-        "R": "#198ce7",
-        "Jupyter Notebook": "#da5b0b",
-        "Shell": "#89e051"
+        "Python": "#4ade80", "HTML": "#e34c26", "CSS": "#563d7c",
+        "JavaScript": "#f1e05a", "R": "#198ce7",
+        "Jupyter Notebook": "#da5b0b", "Shell": "#89e051"
     }
-    
-    total_langs = sum(languages.values()) if languages else 1
-    languages_pct = []
-    for lang, count in sorted(languages.items(), key=lambda x: x[1], reverse=True)[:4]:
-        pct = round((count / total_langs) * 100, 1)
-        color = lang_colors.get(lang, "#a8a29e")
-        languages_pct.append((lang, pct, color))
-        
-    # Add "Other" if there's remaining percentage
-    spent_pct = sum(x[1] for x in languages_pct)
-    if spent_pct < 100:
-        languages_pct.append(("Other", round(100 - spent_pct, 1), "#a8a29e"))
-        
-    user_stats['languages'] = languages_pct
-    
-    # 3. Fetch total commits (a quick estimation from search API)
-    commits_search_raw = fetch_url(f"https://api.github.com/search/commits?q=author:{username}")
-    commits = 0
-    if commits_search_raw:
+    total = sum(langs.values()) or 1
+    lang_list = []
+    for lang, cnt in sorted(langs.items(), key=lambda x: x[1], reverse=True)[:4]:
+        lang_list.append((lang, round(cnt/total*100, 1), lang_colors.get(lang, "#a8a29e")))
+    spent = sum(x[1] for x in lang_list)
+    if spent < 100:
+        lang_list.append(("Other", round(100-spent, 1), "#a8a29e"))
+    stats['languages'] = lang_list
+
+    commits_raw = fetch_url(f"https://api.github.com/search/commits?q=author:{username}")
+    commits = 466
+    if commits_raw:
         try:
-            commits_data = json.loads(commits_search_raw)
-            commits = commits_data.get('total_count', 0)
+            commits = json.loads(commits_raw).get('total_count', 466)
         except Exception:
             pass
-    if commits == 0:
-         commits = 466 # fallback estimate
-    user_stats['commits'] = commits
-    
-    # 4. Fetch contribution grid HTML
+    stats['commits'] = commits
+
     contributions_html = fetch_url(f"https://github.com/users/{username}/contributions")
     contributions = []
     if contributions_html:
-        pattern = r'data-date="(\d{4}-\d{2}-\d{2})".*?data-level="(\d+)"'
-        matches = re.findall(pattern, contributions_html)
-        for date, level in matches:
+        for date, level in re.findall(r'data-date="(\d{4}-\d{2}-\d{2})".*?data-level="(\d+)"', contributions_html):
             contributions.append({'date': date, 'level': int(level)})
         contributions.sort(key=lambda x: x['date'])
-        
-    return user_stats, contributions
+
+    return stats, contributions
+
 
 # ==========================================================
-# SVG GENERATION
+# SVG GENERATION  — matches reference image exactly
 # ==========================================================
 def generate_svg(username, stats, contributions):
-    # Setup standard 53x7 grid
-    grid = [[0 for _ in range(7)] for _ in range(53)]
-    
+    # Build 53×7 contribution grid
+    grid = [[0]*7 for _ in range(53)]
     if contributions:
-        # Group days into weeks
-        start_date = datetime.strptime(contributions[0]['date'], "%Y-%m-%d")
+        start = datetime.strptime(contributions[0]['date'], "%Y-%m-%d")
         for day in contributions:
             dt = datetime.strptime(day['date'], "%Y-%m-%d")
-            days_diff = (dt - start_date).days
-            week_idx = days_diff // 7
-            day_idx = days_diff % 7
-            if week_idx < 53:
-                grid[week_idx][day_idx] = day['level']
-                
+            diff = (dt - start).days
+            w, d = diff//7, diff%7
+            if w < 53:
+                grid[w][d] = day['level']
+
     if FORCE_LUSH_GARDEN:
-        # Generate some beautiful dummy contribution levels for a lush garden demo
         import random
         random.seed(42)
         grid = [[random.choice([0,0,1,1,2,3,4]) for _ in range(7)] for _ in range(53)]
 
-    # Card layout configs
-    width = 950
-    height = 330
-    
-    # SVG Elements lists
-    defs = []
-    styles = []
-    elements = []
-    
-    # Defs: Gradients, Glow filters
+    # Canvas
+    W, H = 900, 320
+
+    defs  = []
+    style = []
+    els   = []
+
+    # ── Gradients & Filters ────────────────────────────────
     defs.append("""
-    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#020f07" />
-        <stop offset="100%" stop-color="#041f0f" />
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#010d05"/>
+      <stop offset="100%" stop-color="#031808"/>
     </linearGradient>
-    <linearGradient id="stem-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#81c784" />
-        <stop offset="100%" stop-color="#2e7d32" />
+    <linearGradient id="stemG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#166534"/>
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="2.5" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <radialGradient id="leftFade" cx="0%" cy="50%" r="30%">
+      <stop offset="0%"   stop-color="#010d05"/>
+      <stop offset="100%" stop-color="#010d05" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
     </filter>
-    <filter id="card-glow" x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.5" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
     </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5"
+                    flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <clipPath id="leftClip">
+      <rect x="0" y="0" width="625" height="320"/>
+    </clipPath>
+    <clipPath id="rightClip">
+      <rect x="630" y="0" width="270" height="320"/>
+    </clipPath>
     """)
-    
-    # Stylesheet (Using standard system fallback fonts to avoid external @import network block in GitHub SVG renderer)
-    styles.append("""
+
+    # ── CSS Animations ─────────────────────────────────────
+    style.append("""
     text {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        fill: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      fill: #d1fae5;
     }
-    .title {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        fill: #81c784;
+    .ttl  { font-size:10px; font-weight:700; letter-spacing:1.8px; fill:#6ee7b7; }
+    .mon  { font-size:8.5px; fill:#4ade80; opacity:0.7; }
+    .slabel { font-size:11.5px; fill:#a7f3d0; }
+    .sval   { font-size:11.5px; fill:#6ee7b7; font-weight:700;
+              font-family: 'Fira Code', Consolas, monospace; }
+    .llabel { font-size:10.5px; fill:#a7f3d0; }
+    .lpct   { font-size:10px; fill:#6ee7b7;
+              font-family: 'Fira Code', Consolas, monospace; }
+    .quote  { font-style:italic; font-size:11px; fill:#4ade80; opacity:0.65;
+              font-family: Georgia, serif; }
+    .banner { font-style:italic; font-size:11.5px; fill:#86efac; }
+    .firefly { animation: ff 4s infinite ease-in-out; }
+    @keyframes ff {
+      0%,100% { opacity:0.15; r:1.5px; }
+      50%      { opacity:0.95; r:2.5px; }
     }
-    .marquee {
-        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-        font-style: italic;
-        font-size: 13px;
-        fill: #a8e6cf;
+    .sway {
+      transform-box: fill-box;
+      transform-origin: bottom center;
+      animation: sway 5s infinite ease-in-out alternate;
     }
-    .stat-label {
-        font-size: 12px;
-        fill: #94a3b8;
+    @keyframes sway {
+      0%   { transform: rotate(-4deg); }
+      100% { transform: rotate(4deg);  }
     }
-    .stat-val {
-        font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 12px;
-        font-weight: 600;
-        fill: #4ade80;
-        text-anchor: end;
+    .pop {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      opacity: 0;
+      animation: pop 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
     }
-    .lang-label {
-        font-size: 11px;
-        fill: #cbd5e1;
+    @keyframes pop {
+      to { opacity:1; transform: scale(1); }
+      from { transform: scale(0); }
     }
-    .lang-pct {
-        font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        font-size: 10px;
-        fill: #94a3b8;
+    .grow {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: grow 1.4s ease forwards;
     }
-    .quote {
-        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-        font-style: italic;
-        font-size: 12px;
-        fill: #6b7280;
-        text-anchor: middle;
-    }
-    .firefly {
-        animation: pulse 3s infinite ease-in-out;
-    }
-    @keyframes pulse {
-        0%, 100% { opacity: 0.2; transform: scale(0.8); }
-        50% { opacity: 0.9; transform: scale(1.2); }
-    }
+    @keyframes grow { to { stroke-dashoffset: 0; } }
     """)
-    
-    # Main outer rectangle
-    elements.append('<rect x="0" y="0" width="950" height="330" rx="16" fill="url(#bg-gradient)" stroke="#113e21" stroke-width="2"/>')
-    
-    # Top Marquee / Tagline
-    elements.append('<text x="35" y="30" class="marquee">🌱 A scientist in the making.  🌲 A nature lover at heart.  🌿 A dreamer forever.</text>')
-    
-    # Cards layout (Glassmorphism borders & shadows)
-    # 1. Left Card: Contribution Garden
-    elements.append('<rect x="20" y="48" width="670" height="262" rx="12" fill="#03150b" fill-opacity="0.65" stroke="#164e2d" stroke-width="1.2" filter="url(#card-glow)"/>')
-    elements.append('<text x="50" y="74" class="title">🌿 CONTRIBUTION GARDEN</text>')
-    
-    # 2. Right Top Card: Lab Stats
-    elements.append('<rect x="710" y="48" width="220" height="124" rx="12" fill="#03150b" fill-opacity="0.65" stroke="#164e2d" stroke-width="1.2" filter="url(#card-glow)"/>')
-    elements.append('<text x="730" y="74" class="title">🔬 LAB STATS</text>')
-    
-    # 3. Right Bottom Card: Languages
-    elements.append('<rect x="710" y="186" width="220" height="124" rx="12" fill="#03150b" fill-opacity="0.65" stroke="#164e2d" stroke-width="1.2" filter="url(#card-glow)"/>')
-    elements.append('<text x="730" y="210" class="title">💻 LANGUAGES</text>')
-    
-    # ==========================================================
-    # RENDER GRID & THE GARDEN (Trellis & Stems)
-    # ==========================================================
-    # Grid offset: x starting at 50, y starting at 95
-    grid_x = 50
-    grid_y = 92
-    cell_size = 9
-    spacing = 3.2
-    step = cell_size + spacing # 12.2
-    
-    # Contribution Colors (Forest/Garden theme)
+
+    # ── Background ─────────────────────────────────────────
+    els.append(f'<rect width="{W}" height="{H}" rx="14" fill="url(#bgG)"/>')
+
+    # Subtle edge vignette on left side
+    els.append(f'<rect x="0" y="0" width="80" height="{H}" rx="0" fill="url(#leftFade)"/>')
+
+    # ── Top banner ─────────────────────────────────────────
+    els.append(
+        f'<text x="16" y="20" class="banner">'
+        f'🌿 A scientist in the making.  •  A nature lover at heart.  •  A dreamer forever.  🌿'
+        f'</text>'
+    )
+
+    # ── LEFT PANEL: Contribution Garden ────────────────────
+    # card bg
+    els.append('<rect x="8" y="30" width="612" height="278" rx="11" '
+               'fill="#020e06" fill-opacity="0.75" stroke="#14532d" stroke-width="1.2" '
+               'filter="url(#shadow)"/>')
+
+    # title
+    els.append('<text x="22" y="52" class="ttl">🌿 CONTRIBUTION GARDEN  ·</text>')
+
+    # Month labels — 12 labels across 53 weeks
+    month_labels = ["Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul"]
+    label_cols   = [0, 4, 9, 13, 18, 22, 26, 31, 35, 39, 44, 48, 52]
+    grid_x = 16
+    step   = 11.0   # cell + gap
+    cell   = 8.5
+
+    for lbl, lc in zip(month_labels, label_cols):
+        lx = grid_x + lc * step
+        els.append(f'<text x="{lx:.1f}" y="68" class="mon">· {lbl}</text>')
+
+    # Contribution cells
+    grid_y = 74
+    soil_y = 248
+
     colors = {
-        0: "#06180d", # Invisible background/soil
-        1: "#0f361d", # Light sprout green
-        2: "#1c5d33", # Medium leaf green
-        3: "#2e8b4e", # Rich plant green
-        4: "#4ade80"  # Blooming bright neon green
+        0: "#0b2215",   # empty
+        1: "#14532d",   # light
+        2: "#166534",   # medium-low
+        3: "#15803d",   # medium-high
+        4: "#22c55e"    # bright
     }
-    
-    # Draw contribution grid cells (trellis)
+
     for col in range(53):
         for row in range(7):
-            level = grid[col][row]
-            color = colors[level]
-            cx = grid_x + col * step
-            cy = grid_y + row * step
-            elements.append(f'<rect x="{cx}" y="{cy}" width="{cell_size}" height="{cell_size}" rx="2" fill="{color}"/>')
-            
-    # Ground soil line
-    soil_y = 265
-    elements.append(f'<line x1="35" y1="{soil_y}" x2="675" y2="{soil_y}" stroke="#143d22" stroke-width="1.5" stroke-dasharray="4 2"/>')
-    
-    # Flower color palette choices
-    # Petals color, Center color
-    flower_styles = [
-        ("#b39ddb", "#ffd54f"),  # Purple Daisy
-        ("#f48fb1", "#fff59d"),  # Pink Cosmos
-        ("#81d4fa", "#ffca28"),  # Blue Bell
-        ("#ffb74d", "#d4e157"),  # Orange Lily
-        ("#ffffff", "#ffd54f"),  # White Camomile
-    ]
-    
-    # Draw Stems, Vines and Flowers growing up
-    for col in range(53):
-        week_total = sum(grid[col])
-        col_x = grid_x + col * step + (cell_size / 2)
-        
-        if week_total > 0:
-            # Stem height proportional to commits
-            # Min height: 25px, Max height: 160px
-            stem_h = min(25 + week_total * 5.0, 160)
-            target_y = soil_y - stem_h
-            
-            # Curved Bezier path for organic growth
-            wiggle = math.sin(col) * 12
-            target_x = col_x + wiggle
-            
-            # Draw stem path
-            elements.append(
-                f'<path d="M {col_x} {soil_y} Q {col_x + wiggle*0.5} {soil_y - stem_h*0.5} {target_x} {target_y}" '
-                f'stroke="url(#stem-gradient)" stroke-width="1.5" fill="none" opacity="0.85"/>'
+            lvl   = grid[col][row]
+            color = colors[lvl]
+            cx    = grid_x + col * step
+            cy    = grid_y + row * step
+            # slightly rounded squares like reference
+            els.append(
+                f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell}" height="{cell}" '
+                f'rx="2" fill="{color}" opacity="0.9"/>'
             )
-            
-            # Draw leaves
-            if stem_h > 45:
-                # Leaf 1 (Left, 40% height)
-                ly1 = soil_y - stem_h * 0.4
-                lx1 = col_x + wiggle * 0.16
-                elements.append(f'<path d="M {lx1} {ly1} C {lx1-6} {ly1-3} {lx1-8} {ly1+2} {lx1} {ly1}" fill="#4ade80" opacity="0.8"/>')
-                
-                # Leaf 2 (Right, 70% height)
-                ly2 = soil_y - stem_h * 0.7
-                lx2 = col_x + wiggle * 0.49
-                elements.append(f'<path d="M {lx2} {ly2} C {lx2+6} {ly2-3} {lx2+8} {ly2+2} {lx2} {ly2}" fill="#4ade80" opacity="0.8"/>')
-            
-            # Bloom flower at top based on contributions
-            if week_total >= 8:
-                # High commits = Beautiful blooming flower!
-                # Choose color style deterministically based on week number
-                flower_color, center_color = flower_styles[col % len(flower_styles)]
-                
-                elements.append(f'<g transform="translate({target_x}, {target_y})">')
-                # 5 circles as petals
-                elements.append(f'  <circle cx="0" cy="-4.5" r="3.5" fill="{flower_color}"/>')
-                elements.append(f'  <circle cx="4.2" cy="-1.4" r="3.5" fill="{flower_color}"/>')
-                elements.append(f'  <circle cx="2.6" cy="3.6" r="3.5" fill="{flower_color}"/>')
-                elements.append(f'  <circle cx="-2.6" cy="3.6" r="3.5" fill="{flower_color}"/>')
-                elements.append(f'  <circle cx="-4.2" cy="-1.4" r="3.5" fill="{flower_color}"/>')
-                # Yellow flower center
-                elements.append(f'  <circle cx="0" cy="0" r="2.2" fill="{center_color}"/>')
-                elements.append('</g>')
-            elif week_total >= 3:
-                # Medium commits = A flower bud
-                elements.append(
-                    f'<path d="M {target_x} {target_y} C {target_x-4} {target_y-6} {target_x} {target_y-10} {target_x} {target_y-10} '
-                    f'C {target_x} {target_y-10} {target_x+4} {target_y-6} {target_x} {target_y}" fill="#f48fb1"/>'
-                )
-            else:
-                # Low commits = Small green sprout/leaves
-                elements.append(
-                    f'<path d="M {target_x} {target_y} C {target_x-3} {target_y-3} {target_x-4} {target_y} {target_x} {target_y} '
-                    f'C {target_x+3} {target_y-3} {target_x+4} {target_y} {target_x} {target_y}" fill="#81c784"/>'
-                )
-        else:
-            # 25% chance of grass for non-commit weeks to keep ground lush
-            if col % 4 == 0:
-                elements.append(
-                    f'<path d="M {col_x} {soil_y} Q {col_x-2} {soil_y-6} {col_x-4} {soil_y-9} Q {col_x-1} {soil_y-4} {col_x} {soil_y} Z" fill="#1b5e3a"/>'
-                )
-                
-    # Add a couple of glowing fireflies/particles
-    firefly_coords = [(120, 210), (280, 180), (450, 220), (580, 160), (320, 80), (80, 110)]
-    for i, (fx, fy) in enumerate(firefly_coords):
-        elements.append(
-            f'<circle cx="{fx}" cy="{fy}" r="2" fill="#ffd54f" filter="url(#glow)" class="firefly" '
-            f'style="animation-delay: {i*0.5}s; opacity: 0.75;"/>'
-        )
-        
-    # Quote at bottom of left card
-    elements.append('<text x="355" y="292" class="quote">"Small commits, big changes."</text>')
-    
-    # ==========================================================
-    # RIGHT TOP CARD: LAB STATS
-    # ==========================================================
-    stat_y_start = 100
-    stat_spacing = 20
-    
-    # Stats fields configuration
-    stats_list = [
-        ("Repositories", stats["public_repos"], "📁"),
-        ("Commits", stats["commits"], "🌿"),
-        ("Stars", stats["stars"], "⭐"),
-        ("Followers", stats["followers"], "👥"),
-        ("Following", stats["following"], "🤝")
+
+    # Soil / ground line
+    els.append(f'<line x1="8" y1="{soil_y}" x2="618" y2="{soil_y}" '
+               f'stroke="#14532d" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>')
+
+    # ── Flowers & Stems ─────────────────────────────────────
+    flower_palettes = [
+        ("#a78bfa", "#e2e8f0"),   # violet / white centre
+        ("#93c5fd", "#fde68a"),   # blue / yellow centre
+        ("#f9a8d4", "#fde68a"),   # pink / yellow centre
+        ("#fb923c", "#fde68a"),   # orange / yellow centre
+        ("#ffffff", "#fbbf24"),   # white / amber centre
+        ("#fdba74", "#86efac"),   # peach / green centre
     ]
-    
-    for i, (label, val, icon) in enumerate(stats_list):
-        curr_y = stat_y_start + i * stat_spacing
-        elements.append(f'<text x="732" y="{curr_y}" class="stat-label">{icon}  {label}</text>')
-        elements.append(f'<text x="910" y="{curr_y}" class="stat-val">{val}</text>')
-        
-    # ==========================================================
-    # RIGHT BOTTOM CARD: LANGUAGES
-    # ==========================================================
-    # Donut center: cx = 770, cy = 245
-    # Radius = 24
-    donut_cx = 770
-    donut_cy = 248
-    donut_r = 24
-    donut_circumference = 2 * math.pi * donut_r # ~150.8
-    
-    # Background circle underlay
-    elements.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="none" stroke="#051c0f" stroke-width="8"/>')
-    
-    # Draw segments
-    accumulated_pct = 0
-    for lang, pct, color in stats["languages"]:
-        dash_len = (pct / 100) * donut_circumference
-        gap_len = donut_circumference - dash_len
-        offset = - (accumulated_pct / 100) * donut_circumference
-        
-        elements.append(
-            f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="none" stroke="{color}" stroke-width="8" '
-            f'stroke-dasharray="{dash_len:.2f} {gap_len:.2f}" stroke-dashoffset="{offset:.2f}" '
-            f'transform="rotate(-90 {donut_cx} {donut_cy})"/>'
+
+    for col in range(53):
+        week_sum = sum(grid[col])
+        cx = grid_x + col * step + cell / 2
+        delay = col * 0.018
+
+        if week_sum <= 0:
+            # sparse grass blades on empty weeks
+            if col % 5 == 0:
+                els.append(
+                    f'<path class="grow" style="animation-delay:{delay:.2f}s" '
+                    f'd="M {cx:.1f} {soil_y} Q {cx-2:.1f} {soil_y-10} {cx-3:.1f} {soil_y-14}" '
+                    f'stroke="#166534" stroke-width="1.2" fill="none" opacity="0.5"/>'
+                )
+            continue
+
+        # stem height
+        stem_h = min(20 + week_sum * 5.5, 155)
+        tip_y  = soil_y - stem_h
+        wg     = math.sin(col * 0.9) * 10
+        tip_x  = cx + wg
+
+        # curved stem
+        els.append(
+            f'<path class="grow" style="animation-delay:{delay:.2f}s" '
+            f'd="M {cx:.1f} {soil_y} Q {cx+wg*0.4:.1f} {soil_y-stem_h*0.55:.1f} {tip_x:.1f} {tip_y:.1f}" '
+            f'stroke="url(#stemG)" stroke-width="1.4" fill="none" opacity="0.9"/>'
         )
-        accumulated_pct += pct
-        
-    # Draw Legend on the right of the donut
-    legend_x = 818
-    legend_y_start = 216
-    legend_spacing = 16
-    
+
+        # leaves
+        if stem_h > 40:
+            ly1 = soil_y - stem_h * 0.38
+            lx1 = cx + wg * 0.15
+            els.append(
+                f'<path class="pop" style="animation-delay:{delay+0.25:.2f}s" '
+                f'd="M {lx1:.1f} {ly1:.1f} C {lx1-9:.1f} {ly1-4:.1f} {lx1-11:.1f} {ly1+4:.1f} {lx1:.1f} {ly1:.1f}" '
+                f'fill="#4ade80" opacity="0.75"/>'
+            )
+        if stem_h > 80:
+            ly2 = soil_y - stem_h * 0.65
+            lx2 = cx + wg * 0.45
+            els.append(
+                f'<path class="pop" style="animation-delay:{delay+0.4:.2f}s" '
+                f'd="M {lx2:.1f} {ly2:.1f} C {lx2+9:.1f} {ly2-4:.1f} {lx2+11:.1f} {ly2+4:.1f} {lx2:.1f} {ly2:.1f}" '
+                f'fill="#4ade80" opacity="0.75"/>'
+            )
+
+        # flower at tip
+        fc, cc = flower_palettes[col % len(flower_palettes)]
+        fl_delay = delay + 0.55
+
+        if week_sum >= 8:
+            # Full bloom: 5 petals + centre
+            els.append(
+                f'<g class="sway pop" style="animation-delay:{fl_delay:.2f}s" '
+                f'transform="translate({tip_x:.1f},{tip_y:.1f})">'
+            )
+            for p in range(5):
+                ang = p / 5 * 2 * math.pi - math.pi / 2
+                px  = math.cos(ang) * 5.5
+                py  = math.sin(ang) * 5.5
+                els.append(f'<ellipse cx="{px:.2f}" cy="{py:.2f}" rx="3.8" ry="3.2" fill="{fc}" opacity="0.92"/>')
+            els.append(f'<circle cx="0" cy="0" r="2.8" fill="{cc}"/>')
+            els.append('</g>')
+
+        elif week_sum >= 4:
+            # Bud
+            els.append(
+                f'<g class="pop" style="animation-delay:{fl_delay:.2f}s" '
+                f'transform="translate({tip_x:.1f},{tip_y:.1f})">'
+                f'<ellipse cx="0" cy="-4" rx="3" ry="5" fill="{fc}" opacity="0.85"/>'
+                f'<ellipse cx="-3" cy="-2" rx="2.5" ry="4" fill="{fc}" opacity="0.7"/>'
+                f'<ellipse cx="3" cy="-2" rx="2.5" ry="4" fill="{fc}" opacity="0.7"/>'
+                f'</g>'
+            )
+        else:
+            # Tiny sprout
+            els.append(
+                f'<path class="pop" style="animation-delay:{fl_delay:.2f}s" '
+                f'd="M {tip_x:.1f} {tip_y:.1f} C {tip_x-4:.1f} {tip_y-6:.1f} {tip_x} {tip_y-10:.1f} {tip_x:.1f} {tip_y:.1f} '
+                f'C {tip_x+4:.1f} {tip_y-6:.1f} {tip_x} {tip_y-10:.1f} {tip_x:.1f} {tip_y:.1f}" '
+                f'fill="#86efac" opacity="0.85"/>'
+            )
+
+    # Fireflies / sparkles
+    ff_pts = [(80,170),(200,145),(350,200),(500,155),(440,90),(150,105),(560,120),(290,80)]
+    for i,(fx,fy) in enumerate(ff_pts):
+        els.append(
+            f'<circle cx="{fx}" cy="{fy}" r="2" fill="#fde68a" '
+            f'filter="url(#glow)" class="firefly" style="animation-delay:{i*0.6:.1f}s"/>'
+        )
+
+    # Butterfly (simple SVG path near top-right of garden)
+    bx, by = 540, 97
+    els.append(
+        f'<g transform="translate({bx},{by})" opacity="0.7">'
+        f'<path d="M0,0 C-8,-10 -18,-8 -12,0 C-8,4 -4,2 0,0" fill="#d946ef" opacity="0.75"/>'
+        f'<path d="M0,0 C8,-10 18,-8 12,0 C8,4 4,2 0,0" fill="#c026d3" opacity="0.75"/>'
+        f'<path d="M0,0 C-6,5 -12,10 -8,14 C-4,10 -2,5 0,0" fill="#d946ef" opacity="0.6"/>'
+        f'<path d="M0,0 C6,5 12,10 8,14 C4,10 2,5 0,0" fill="#c026d3" opacity="0.6"/>'
+        f'<line x1="0" y1="-2" x2="-4" y2="-8" stroke="#1a1a1a" stroke-width="0.7"/>'
+        f'<line x1="0" y1="-2" x2="4" y2="-8" stroke="#1a1a1a" stroke-width="0.7"/>'
+        f'</g>'
+    )
+
+    # Quote
+    els.append('<text x="312" y="288" class="quote" text-anchor="middle">'
+               '"Small commits, big changes."</text>')
+
+    # ── RIGHT PANEL ────────────────────────────────────────
+    rp_x = 628  # left edge of right panel
+
+    # Divider line
+    els.append(f'<line x1="{rp_x-2}" y1="30" x2="{rp_x-2}" y2="295" '
+               f'stroke="#14532d" stroke-width="1" opacity="0.5"/>')
+
+    # ── LAB STATS card ─────────────────────────────────────
+    els.append(f'<rect x="{rp_x}" y="30" width="262" height="126" rx="10" '
+               f'fill="#020e06" fill-opacity="0.75" stroke="#14532d" stroke-width="1.2" filter="url(#shadow)"/>')
+    els.append(f'<text x="{rp_x+14}" y="52" class="ttl">LAB STATS</text>')
+
+    stat_rows = [
+        ("📁", "Repositories", str(stats["public_repos"])),
+        ("🌿", "Commits",      str(stats["commits"])),
+        ("⭐", "Stars",        str(stats["stars"])),
+        ("👥", "Followers",    str(stats["followers"])),
+        ("🤝", "Following",    str(stats["following"])),
+    ]
+    for i, (ico, lbl, val) in enumerate(stat_rows):
+        ry = 68 + i * 18
+        els.append(f'<text x="{rp_x+14}" y="{ry}" class="slabel">{ico}  {lbl}</text>')
+        els.append(f'<text x="{rp_x+258}" y="{ry}" class="sval" text-anchor="end">{val}</text>')
+
+    # ── LANGUAGES card ─────────────────────────────────────
+    lc_y = 165
+    els.append(f'<rect x="{rp_x}" y="{lc_y}" width="262" height="130" rx="10" '
+               f'fill="#020e06" fill-opacity="0.75" stroke="#14532d" stroke-width="1.2" filter="url(#shadow)"/>')
+    els.append(f'<text x="{rp_x+14}" y="{lc_y+22}" class="ttl">LANGUAGES</text>')
+
+    # Donut chart
+    dcx = rp_x + 50
+    dcy = lc_y + 75
+    r   = 30
+    circ = 2 * math.pi * r
+    acc  = 0.0
+    for lang, pct, color in stats["languages"]:
+        dash = (pct / 100) * circ
+        gap  = circ - dash
+        off  = -(acc / 100) * circ
+        els.append(
+            f'<circle cx="{dcx}" cy="{dcy}" r="{r}" fill="none" stroke="{color}" '
+            f'stroke-width="11" stroke-dasharray="{dash:.2f} {gap:.2f}" '
+            f'stroke-dashoffset="{off:.2f}" transform="rotate(-90 {dcx} {dcy})" '
+            f'filter="url(#softGlow)"/>'
+        )
+        acc += pct
+
+    # Donut inner ring underlay
+    els.append(f'<circle cx="{dcx}" cy="{dcy}" r="21" fill="#010d05"/>')
+
+    # Legend
+    leg_x = rp_x + 96
+    leg_y = lc_y + 42
+    leg_sp = 17
     for i, (lang, pct, color) in enumerate(stats["languages"][:5]):
-        curr_y = legend_y_start + i * legend_spacing
-        # Dot/square
-        elements.append(f'<rect x="{legend_x}" y="{curr_y - 8}" width="7" height="7" rx="1.5" fill="{color}"/>')
-        # Label
-        elements.append(f'<text x="{legend_x + 13}" y="{curr_y - 1}" class="lang-label">{lang}</text>')
-        # Pct
-        elements.append(f'<text x="912" y="{curr_y - 1}" class="lang-pct" text-anchor="end">{pct}%</text>')
+        ly = leg_y + i * leg_sp
+        els.append(f'<rect x="{leg_x}" y="{ly-8}" width="7" height="7" rx="1.5" fill="{color}"/>')
+        els.append(f'<text x="{leg_x+11}" y="{ly}" class="llabel">{lang}</text>')
+        els.append(f'<text x="{rp_x+256}" y="{ly}" class="lpct" text-anchor="end">{pct}%</text>')
 
-    # Compile the SVG
-    svg_out = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="{height}">
-    <defs>
-    {chr(10).join(defs)}
-    </defs>
-    <style>
-    {chr(10).join(styles)}
-    </style>
-    {chr(10).join(elements)}
-</svg>
-"""
-    return svg_out
+    # ── Compile SVG ────────────────────────────────────────
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 {W} {H}" width="100%" height="{H}">
+  <defs>{chr(10).join(defs)}</defs>
+  <style>{chr(10).join(style)}</style>
+  {chr(10).join(els)}
+</svg>"""
+    return svg
 
+
+# ==========================================================
+# MAIN
+# ==========================================================
 def main():
     username = "shunandasharkarbio-boop"
-    
-    # 1. Gather stats (Check configs first)
-    print("Collecting GitHub Statistics...")
+    print("Collecting GitHub data...")
     real_stats, contributions = get_real_data(username)
-    
-    # Mixin overrides
-    final_stats = {}
-    
-    # Repos, commits, stars, followers, following
+
+    final = {}
     if OVERRIDE_STATS:
-        for k, v in OVERRIDE_STATS.items():
-            final_stats[k] = v
+        final.update(OVERRIDE_STATS)
     else:
-        final_stats["public_repos"] = real_stats["public_repos"]
-        final_stats["commits"] = real_stats["commits"]
-        final_stats["stars"] = real_stats["stars"]
-        final_stats["followers"] = real_stats["followers"]
-        final_stats["following"] = real_stats["following"]
-        
-    # Languages
-    if OVERRIDE_LANGUAGES:
-        final_stats["languages"] = OVERRIDE_LANGUAGES
-    else:
-        final_stats["languages"] = real_stats["languages"]
-        
-    # 2. Build the SVG file
-    print("Generating your custom Garden SVG...")
-    svg_code = generate_svg(username, final_stats, contributions)
-    
-    # 3. Write out the SVG
-    output_path = "garden.svg"
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg_code)
-        
-    print(f"Success! Saved garden visualization to '{output_path}'")
+        for k in ("public_repos","commits","stars","followers","following"):
+            final[k] = real_stats[k]
+
+    final["languages"] = OVERRIDE_LANGUAGES if OVERRIDE_LANGUAGES else real_stats["languages"]
+
+    print("Generating garden SVG...")
+    svg = generate_svg(username, final, contributions)
+
+    with open("garden.svg", "w", encoding="utf-8") as f:
+        f.write(svg)
+    print("Done! Saved to garden.svg")
 
 if __name__ == "__main__":
     main()
