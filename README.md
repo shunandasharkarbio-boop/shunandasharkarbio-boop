@@ -54,20 +54,19 @@ Learning Bioinformatics using the Galaxy Platform
 
 ---
 
-# 🌱 Currently Learning
+## 🌱 Currently Learning
 
-✔ Galaxy Workflow Development
-
-✔ Linux
-
-✔ Python
-
-✔ RNA-Seq Analysis
-
-✔ Variant Calling
-
-✔ Genome Annotation
-
+```
+📚 Learning Roadmap 2024–2025
+├── ✅ Galaxy Workflow Development
+├── ✅ FastQC & MultiQC Quality Control
+├── ✅ RNA-Seq Analysis (HISAT2 + DESeq2)
+├── ✅ Variant Calling (GATK pipeline)
+├── 🔄 Python for Bioinformatics (Biopython, Pandas, NumPy)
+├── 🔄 Linux & Bash Scripting
+├── 🔄 Genome Annotation
+└── 📌 Coming Next: Machine Learning in Genomics
+```
 ---
 
 # 📂 Featured Projects
