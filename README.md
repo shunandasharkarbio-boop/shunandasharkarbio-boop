@@ -69,17 +69,27 @@ Learning Bioinformatics using the Galaxy Platform
 ```
 ---
 
-# 📂 Featured Projects
+## 📂 Featured Projects
 
-🧬 Galaxy NGS Workflow
+| 🧬 Project | 📋 Description | 🛠 Tools Used | 🔗 |
+|---|---|---|---|
+| **Galaxy NGS Workflow** | End-to-end next-generation sequencing pipeline built on Galaxy | Galaxy, FastQC, MultiQC | [View](https://github.com/shunandasharkarbio-boop) |
+| **RNA-Seq Analysis** | Differential gene expression analysis from raw reads to results | HISAT2, DESeq2, R, Galaxy | [View](https://github.com/shunandasharkarbio-boop) |
+| **Variant Calling Pipeline** | SNP & Indel detection from whole genome sequencing data | GATK, bcftools, Trimmomatic | [View](https://github.com/shunandasharkarbio-boop) |
+| **FastQC & MultiQC Reports** | Automated quality control and aggregated reporting for NGS reads | FastQC, MultiQC | [View](https://github.com/shunandasharkarbio-boop) |
+| **Linux for Bioinformatics** | Essential Linux commands and scripts for biological data analysis | Bash, Linux, Shell scripting | [View](https://github.com/shunandasharkarbio-boop) |
 
-🧬 RNA-Seq Analysis
+---
 
-🧬 Variant Calling Pipeline
 
-🧬 FastQC & MultiQC Reports
+## 🏅 Achievements & Milestones
 
-🧬 Linux for Bioinformatics
+| 🏆 Achievement | 📝 Details |
+|---|---|
+| 🎓 **ICCR Scholar** | Recipient of the prestigious Indian Council for Cultural Relations scholarship |
+| 🏥 **Clinical Lab Internship** | 28-day wet lab internship at Medicover Hospital |
+| 🌌 **Galaxy Workflow Developer** | Built complete NGS workflows on the Galaxy Bioinformatics Platform |
+| 🔬 **NGS Analysis** | Hands-on experience with RNA-Seq, Variant Calling & Genome Annotation |
 
 ---
 
