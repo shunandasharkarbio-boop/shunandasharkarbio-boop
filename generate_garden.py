@@ -174,11 +174,10 @@ def generate_svg(username, stats, contributions):
     </filter>
     """)
     
-    # Stylesheet
+    # Stylesheet (Using standard system fallback fonts to avoid external @import network block in GitHub SVG renderer)
     styles.append("""
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
     text {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         fill: #e2e8f0;
     }
     .title {
@@ -188,7 +187,7 @@ def generate_svg(username, stats, contributions):
         fill: #81c784;
     }
     .marquee {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-size: 13px;
         fill: #a8e6cf;
@@ -198,7 +197,7 @@ def generate_svg(username, stats, contributions):
         fill: #94a3b8;
     }
     .stat-val {
-        font-family: 'Fira Code', monospace;
+        font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 12px;
         font-weight: 600;
         fill: #4ade80;
@@ -209,12 +208,12 @@ def generate_svg(username, stats, contributions):
         fill: #cbd5e1;
     }
     .lang-pct {
-        font-family: 'Fira Code', monospace;
+        font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-size: 10px;
         fill: #94a3b8;
     }
     .quote {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
         font-style: italic;
         font-size: 12px;
         fill: #6b7280;
