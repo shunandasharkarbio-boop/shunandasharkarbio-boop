@@ -22,12 +22,12 @@
 
 <table>
 <tr>
-<td width="55%" valign="top">
+<td width="45%" valign="top">
 
 ### 👩‍🔬 Biography
 *Deeply curious about nature, trees, and the science of life. I thrive in quiet solitude, finding my absolute focus in scientific thinking and coding. My ultimate goal is to become a research scientist in Genomics and Bioinformatics.*
 
-- 🌳 **Nature & Tree Lover:** Deeply connected to forests, trees, and the beauty of the natural world.
+
 - 🧘 **Solitude & Deep Focus:** I love quiet solitude, finding my absolute peace and focus in deep scientific thinking and code.
 - 🔬 **Aspiring Research Scientist:** Driven by the dream to become a research scientist in Genomics and Bioinformatics.
 - 🎓 **3rd Year B.Tech Biotechnology:** Undergraduate student and proud **ICCR Scholar**.
@@ -40,9 +40,9 @@
 > — Theodosius Dobzhansky
 
 </td>
-<td width="45%" align="center" valign="center">
+<td width="35%" align="center" valign="center">
 
-<img src="./blood-dna.gif" width="380" alt="Shunanda Sharkar Profile Dashboard"/>
+<img src="./blood-dna.gif" width="340" alt="Shunanda Sharkar Profile Dashboard"/>
 
 </td>
 </tr>
