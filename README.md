@@ -49,7 +49,7 @@
 </td>
 <td width="45%" align="center" valign="center">
 
-<img src="./profile-banner-motion.gif" width="380" alt="Shunanda Sharkar Profile Dashboard"/>
+<img src="./blood-dna.gif" width="380" alt="Shunanda Sharkar Profile Dashboard"/>
 
 </td>
 </tr>
@@ -106,15 +106,6 @@
 
 ---
 
-## 🏆 GitHub Trophies
-
-<div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=shunandasharkarbio-boop&theme=radical&no-frame=true&no-bg=false&margin-w=4&row=1" alt="Trophies"/>
-
-</div>
-
----
 
 ## 📂 Featured Projects
 
