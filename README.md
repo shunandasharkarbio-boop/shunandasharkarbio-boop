@@ -136,55 +136,53 @@
 
 <td align="center" width="33%">
 
-<img src="./images/nptel-logo.png" width="80"/>
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Evolutionary%20Dynamics.jpg">
+
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="80"/>
+
+</a>
 
 <h3>🧬 Evolutionary Dynamics</h3>
 
-NPTEL Certified
-
-<br/>
-
-<a href="YOUR_CERTIFICATE_LINK">
-View Certificate →
-</a>
+<b>NPTEL Certified</b>
 
 </td>
 
 
 <td align="center" width="33%">
 
-<img src="./images/nptel-logo.png" width="80"/>
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Genetic%20engineering.jpg">
+
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="80"/>
+
+</a>
 
 <h3>🧬 Genetic Engineering</h3>
 
-Theory & Applications  
+<b>Theory & Applications</b>
+
 <br/>
+
 NPTEL Certified
-
-<br/>
-
-<a href="YOUR_CERTIFICATE_LINK">
-View Certificate →
-</a>
 
 </td>
 
 
 <td align="center" width="33%">
 
-<img src="./images/medicover-logo.png" width="80"/>
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/medicover%20certificte.jpg">
+
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/medicover-logo.png" width="80"/>
+
+</a>
 
 <h3>🏥 Laboratory Internship</h3>
 
-Medicover Hospitals  
+<b>Medicover Hospitals</b>
+
 <br/>
+
 28-Day Wet Lab Training
-
-<br/>
-
-<a href="YOUR_CERTIFICATE_LINK">
-View Certificate →
-</a>
 
 </td>
 
