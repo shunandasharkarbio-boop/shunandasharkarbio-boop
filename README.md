@@ -28,7 +28,7 @@
 *Deeply curious about nature, trees, and the science of life. I thrive in quiet solitude, finding my absolute focus in scientific thinking and coding. My ultimate goal is to become a research scientist in Genomics and Bioinformatics.*
 
 
-- 🧘 **Solitude & Deep Focus:** I love quiet solitude, finding my absolute peace and focus in deep scientific thinking and code.
+- 🧬 **Evolutionary Biology Explorer:** Interested in understanding genetic variation, evolutionary processes, and how biological systems change over time.
 - 🔬 **Aspiring Research Scientist:** Driven by the dream to become a research scientist in Genomics and Bioinformatics.
 - 🎓 **3rd Year B.Tech Biotechnology:** Undergraduate student and proud **ICCR Scholar**.
 - 🏥 **Medicover Hospital Intern:** Completed a 28-day wet lab clinical laboratory internship.
