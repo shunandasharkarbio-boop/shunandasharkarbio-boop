@@ -127,7 +127,7 @@
 ```
 
 ---
-## 🏅 Certifications & Milestones
+## 🏅 Certifications & Achievements
 
 <div align="center">
 
@@ -136,53 +136,69 @@
 
 <td align="center" width="33%">
 
-<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Evolutionary%20Dynamics.jpg">
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Evolutionary%20Dynamics.jpg" target="_blank">
 
-<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="80"/>
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="90"/>
 
 </a>
 
-<h3>🧬 Evolutionary Dynamics</h3>
+### 🧬 Evolutionary Dynamics
 
-<b>NPTEL Certified</b>
+🎓 **NPTEL Elite Certified**
+
+Study of evolution, natural selection, game theory, and population dynamics.
+
+<br>
+
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Evolutionary%20Dynamics.jpg">
+<img src="https://img.shields.io/badge/View-Certificate-blue?style=for-the-badge&logo=readthedocs"/>
+</a>
 
 </td>
 
-
 <td align="center" width="33%">
+
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Genetic%20engineering.jpg" target="_blank">
+
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="90"/>
+
+</a>
+
+### 🧬 Genetic Engineering
+
+🎓 **NPTEL Certified**
+
+Gene cloning, recombinant DNA technology, CRISPR, and molecular biology applications.
+
+<br>
 
 <a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Genetic%20engineering.jpg">
-
-<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/nptel-logo.png" width="80"/>
-
+<img src="https://img.shields.io/badge/View-Certificate-success?style=for-the-badge&logo=readthedocs"/>
 </a>
-
-<h3>🧬 Genetic Engineering</h3>
-
-<b>Theory & Applications</b>
-
-<br/>
-
-NPTEL Certified
 
 </td>
 
-
 <td align="center" width="33%">
 
-<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/medicover%20certificte.jpg">
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/medicover%20certificte.jpg" target="_blank">
 
-<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/medicover-logo.png" width="80"/>
+<img src="https://raw.githubusercontent.com/shunandasharkarbio-boop/shunandasharkarbio-boop/main/photo/medicover-logo.png" width="90"/>
 
 </a>
 
-<h3>🏥 Laboratory Internship</h3>
+### 🏥 Laboratory Internship
 
-<b>Medicover Hospitals</b>
+**Medicover Hospitals**
 
-<br/>
+🧪 **28-Day Wet Laboratory Training**
 
-28-Day Wet Lab Training
+Hands-on experience in microbiology, hematology, biochemistry, and clinical diagnostics.
+
+<br>
+
+<a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/medicover%20certificte.jpg">
+<img src="https://img.shields.io/badge/View-Certificate-red?style=for-the-badge&logo=readthedocs"/>
+</a>
 
 </td>
 
@@ -190,6 +206,10 @@ NPTEL Certified
 </table>
 
 </div>
+
+---
+
+
 
 ### 🤝 Open to Research Collaborations | Internships | Academic Discussions
 
