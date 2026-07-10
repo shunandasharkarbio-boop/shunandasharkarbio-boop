@@ -10,14 +10,7 @@
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=00C853&center=true&vCenter=true&width=750&lines=🧬+Galaxy+Workflow+Developer;🔬+NGS+%26+RNA-Seq+Analysis;🧪+Variant+Calling+%26+Genome+Annotation;🐍+Python+for+Bioinformatics;🌱+Always+Learning+New+Things!" />
 
-<br/>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shunanda-sharkar-a52a54344/)
-[![Gmail](https://img.shields.io/badge/Gmail-Contact_Me-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shunanda.sharkar.bio@gmail.com)
-[![ResearchGate](https://img.shields.io/badge/ResearchGate-Profile-00CCBB?style=for-the-badge&logo=researchgate&logoColor=white)](https://www.researchgate.net/profile/Shunanda-Sharkar)
-[![ORCID](https://img.shields.io/badge/ORCID-iD-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0009-0008-5327-639X)
-
-<br/>
 
 ![Profile Views](https://komarev.com/ghpvc/?username=shunandasharkarbio-boop&color=00C853&style=for-the-badge&label=Profile+Views)
 
@@ -67,12 +60,12 @@
   <img src="https://img.shields.io/badge/HISAT2-RNA_Alignment-7B1FA2?style=for-the-badge" />
   <img src="https://img.shields.io/badge/DESeq2-Differential_Expression-1565C0?style=for-the-badge" />
   <img src="https://img.shields.io/badge/GATK-Variant_Calling-00695C?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Trimmomatic-Read_Trimming-F57F17?style=for-the-badge" />
+ 
 </p>
 
 ### 💻 Programming & Development
 <p>
-  <img src="https://skillicons.dev/icons?i=python,linux,bash,git,github,vscode,r" />
+  <img src="https://skillicons.dev/icons?i=python,git,github,vscode" />
 </p>
 
 ### 📊 Analysis Pipelines & Domains
