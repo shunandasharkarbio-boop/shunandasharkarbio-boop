@@ -52,30 +52,30 @@
 
 ## 🛠️ Skills & Technologies
 
-### 🧬 Bioinformatics Tools
-<p>
-  <img src="https://img.shields.io/badge/Galaxy-Bioinformatics-3B5998?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PC9zdmc+" />
-  <img src="https://img.shields.io/badge/FastQC-Quality_Control-E44D26?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/MultiQC-Aggregate_Reports-FF6F00?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/HISAT2-RNA_Alignment-7B1FA2?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/DESeq2-Differential_Expression-1565C0?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/GATK-Variant_Calling-00695C?style=for-the-badge" />
- 
-</p>
 
-### 💻 Programming & Development
-<p>
-  <img src="https://skillicons.dev/icons?i=python,git,github,vscode" />
-</p>
 
-### 📊 Analysis Pipelines & Domains
-<p>
-  <img src="https://img.shields.io/badge/RNA--Seq-Analysis-E91E63?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Variant_Calling-SNP%2FIndel-9C27B0?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Genome_Annotation-Structural-2196F3?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/NGS-Next_Gen_Sequencing-4CAF50?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Bioinformatics-Computational_Biology-FF5722?style=for-the-badge" />
-</p>
+<div align="center">
+
+### 🧬 Bioinformatics
+
+<img src="https://img.shields.io/badge/Galaxy-Workflow-2C7BE5?style=for-the-badge" />
+<img src="https://img.shields.io/badge/FastQC-Quality_Control-00C853?style=for-the-badge" />
+<img src="https://img.shields.io/badge/MultiQC-Reporting-43A047?style=for-the-badge" />
+<img src="https://img.shields.io/badge/HISAT2-Alignment-00897B?style=for-the-badge" />
+<img src="https://img.shields.io/badge/DESeq2-Differential_Expression-1E88E5?style=for-the-badge" />
+<img src="https://img.shields.io/badge/GATK-Variant_Calling-6A1B9A?style=for-the-badge" />
+
+<br><br>
+
+### 💻 Programming
+
+<img src="https://skillicons.dev/icons?i=python,git,github,vscode" />
+
+<br><br>
+
+
+
+</div>
 
 ---
 
