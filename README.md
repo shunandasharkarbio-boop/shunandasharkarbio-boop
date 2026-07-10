@@ -127,25 +127,71 @@
 ```
 
 ---
-
-## 🏅 Achievements & Milestones
-
-| 🏆 Achievement | 📝 Details |
-|---|---|
-| 🎓 **ICCR Scholar** | Recipient of the prestigious Indian Council for Cultural Relations scholarship |
-| 🏥 **Clinical Lab Internship** | 28-day wet lab internship at Medicover Hospital |
-| 🌌 **Galaxy Workflow Developer** | Built complete NGS workflows on the Galaxy Bioinformatics Platform |
-| 🔬 **NGS Analysis** | Hands-on experience with RNA-Seq, Variant Calling & Genome Annotation |
-
----
-
-
-
----
-
-## 📬 Let's Connect!
+## 🏅 Certifications & Milestones
 
 <div align="center">
+
+<table>
+<tr>
+
+<td align="center" width="33%">
+
+<img src="./images/nptel-logo.png" width="80"/>
+
+<h3>🧬 Evolutionary Dynamics</h3>
+
+NPTEL Certified
+
+<br/>
+
+<a href="YOUR_CERTIFICATE_LINK">
+View Certificate →
+</a>
+
+</td>
+
+
+<td align="center" width="33%">
+
+<img src="./images/nptel-logo.png" width="80"/>
+
+<h3>🧬 Genetic Engineering</h3>
+
+Theory & Applications  
+<br/>
+NPTEL Certified
+
+<br/>
+
+<a href="YOUR_CERTIFICATE_LINK">
+View Certificate →
+</a>
+
+</td>
+
+
+<td align="center" width="33%">
+
+<img src="./images/medicover-logo.png" width="80"/>
+
+<h3>🏥 Laboratory Internship</h3>
+
+Medicover Hospitals  
+<br/>
+28-Day Wet Lab Training
+
+<br/>
+
+<a href="YOUR_CERTIFICATE_LINK">
+View Certificate →
+</a>
+
+</td>
+
+</tr>
+</table>
+
+</div>
 
 ### 🤝 Open to Research Collaborations | Internships | Academic Discussions
 
