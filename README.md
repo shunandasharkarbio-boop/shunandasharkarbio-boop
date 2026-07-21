@@ -41,7 +41,7 @@
 </td>
 <td width="33%" align="center" valign="center">
 
-<img src="./blood-dna.gif" width="200" alt="Shunanda Sharkar Profile Dashboard"/>
+<img src="./blood-dna.gif" width="210" alt="Shunanda Sharkar Profile Dashboard"/>
 
 </td>
 </tr>
