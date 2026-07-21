@@ -143,7 +143,7 @@
 
 ### 🧬 Evolutionary Dynamics
 
-🎓 **NPTEL Elite Certified**
+🎓 **NPTEL Elite + Silver Certified**
 
 Study of evolution, natural selection, game theory, and population dynamics.
 
@@ -165,7 +165,7 @@ Study of evolution, natural selection, game theory, and population dynamics.
 
 ### 🧬 Genetic Engineering
 
-🎓 **NPTEL Certified**
+🎓 **NPTEL Elite Certified**
 
 Gene cloning, recombinant DNA technology, CRISPR, and molecular biology applications.
 
