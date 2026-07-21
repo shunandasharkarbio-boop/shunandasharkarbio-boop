@@ -191,7 +191,7 @@ Gene cloning, recombinant DNA technology, CRISPR, and molecular biology applicat
 
 🧪 **28-Day Wet Laboratory Observation**
 
-Hands-on experience in microbiology, hematology, biochemistry, and clinical diagnostics.
+Observed laboratory workflows in microbiology, hematology, biochemistry, and clinical diagnostics.
 
 <br>
 
