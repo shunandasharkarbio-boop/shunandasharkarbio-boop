@@ -39,7 +39,7 @@
 > — Theodosius Dobzhansky
 
 </td>
-<td width="60%" align="center" valign="center">
+<td width="20%" align="center" valign="center">
 
 <img src="./blood-dna.gif" width="210" alt="Shunanda Sharkar Profile Dashboard"/>
 
