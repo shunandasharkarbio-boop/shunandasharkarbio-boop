@@ -189,7 +189,7 @@ Gene cloning, recombinant DNA technology, CRISPR, and molecular biology applicat
 
 **Medicover Hospitals**
 
-🧪 **28-Day Wet Laboratory Training**
+🧪 **28-Day Wet Laboratory Observation**
 
 Hands-on experience in microbiology, hematology, biochemistry, and clinical diagnostics.
 
