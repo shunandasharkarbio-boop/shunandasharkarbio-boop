@@ -133,7 +133,7 @@
 <table>
 <tr>
 
-<td align="center" width="33%" height="5">
+<td align="center" width="33%" valign="top">
 
 <a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Evolutionary%20Dynamics.jpg" target="_blank">
 
@@ -155,7 +155,7 @@ Study of evolution, natural selection, game theory, and population dynamics.
 
 </td>
 
-<td align="center" width="33%" height="5">
+<td align="center" width="33%"valign="top">
 
 <a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/Genetic%20engineering.jpg" target="_blank">
 
@@ -177,7 +177,7 @@ Gene cloning, recombinant DNA technology, CRISPR, and molecular biology applicat
 
 </td>
 
-<td align="center" width="33%" height="5">
+<td align="center" width="33%" valign="top">
 
 <a href="https://github.com/shunandasharkarbio-boop/shunandasharkarbio-boop/blob/main/photo/medicover%20certificte.jpg" target="_blank">
 
