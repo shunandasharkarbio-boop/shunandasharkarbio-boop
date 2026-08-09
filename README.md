@@ -4,7 +4,7 @@
 
 <br/>
 
-# 👋 Hello World, I'm Shunanda Sharkar
+# 👋 Hello World, I'm Shunanda Sharkaru
 
 ### 🧬 Biotechnology Undergraduate • Bioinformatician-in-Training • ICCR Scholar
 
@@ -227,4 +227,4 @@ Observed laboratory workflows in microbiology, hematology, biochemistry, and cli
 
 *Made with ❤️ and a passion for Bioinformatics by **Shunanda Sharkar***
 
-</div>
+</div> 
