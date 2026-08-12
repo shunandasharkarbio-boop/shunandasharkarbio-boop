@@ -4,7 +4,7 @@
 
 <br/>
 
-# 👋 Hello World, I'm Shunanda Sharkary
+# 👋 Hello World, I'm Shunanda Sharkar
 
 ### 🧬 Biotechnology Undergraduate • Bioinformatician-in-Training • ICCR Scholar
 
