@@ -55,7 +55,7 @@
 
 <div align="center">
 
-### 🧬 Bioinformatics
+### 🧬 Bioinformaticst
 
 <img src="https://img.shields.io/badge/Galaxy-Workflow-2C7BE5?style=for-the-badge" />
 <img src="https://img.shields.io/badge/FastQC-Quality_Control-00C853?style=for-the-badge" />
