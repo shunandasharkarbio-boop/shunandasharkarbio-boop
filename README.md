@@ -6,7 +6,7 @@
 
 # 👋 Hello World, I'm Shunanda Sharkar
 
-### 🧬 Biotechnology Undergraduate • Bioinformatician-in-Training • ICCR Scholar
+### 🧬 Biotechnology Undergraduate • Bioinformatician-in-Training • ICCR Scholari
 
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=00C853&center=true&vCenter=true&width=750&lines=🧬+Galaxy+Workflow+Developer;🔬+NGS+%26+RNA-Seq+Analysis;🧪+Variant+Calling+%26+Genome+Annotation;🐍+Python+for+Bioinformatics;🌱+Always+Learning+New+Things!" />
