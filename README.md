@@ -19,7 +19,7 @@
 
 ---
 
-## 🌟 About Me
+## 🌟 About Mei
 
 <table>
 <tr>
